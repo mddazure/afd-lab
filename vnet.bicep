@@ -23,7 +23,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' =  {
       name: subnet1name
       properties:{
         addressPrefix: subnet1range
-        networkSecurityGroup: servernsg
+        networkSecurityGroup: {id: servernsg.id}
         }
       }
       {
