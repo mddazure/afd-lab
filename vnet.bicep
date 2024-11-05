@@ -23,6 +23,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' =  {
       name: subnet1name
       properties:{
         addressPrefix: subnet1range
+        networkSecurityGroup: servernsg
         }
       }
       {
@@ -35,6 +36,29 @@ resource vnet 'Microsoft.Network/virtualNetworks@2022-01-01' =  {
         name: subnet3name
         properties:{
           addressPrefix: subnet3range
+        }
+      }
+    ]
+  }
+}
+
+resource servernsg 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
+  name: '${location}-servernsg'
+  location: location
+  properties: {
+    securityRules: [
+      {
+      name: 'AllowHTTPInbound'
+      properties: {
+        access: 'Allow'
+        description: 'Allow HTTP inbound traffic'
+        destinationAddressPrefix: '*'
+        destinationPortRange: '80'
+        direction: 'Inbound'
+        priority: 100
+        protocol: 'Tcp'
+        sourceAddressPrefix: '*'
+        sourcePortRange: '*'
         }
       }
     ]
