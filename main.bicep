@@ -1,6 +1,6 @@
 param location1 string = 'swedencentral'
 param location2 string = 'norwayeast'
-param rgname string = 'afdlab-rg'
+param rgname string = 'afdlab-rg2'
 
 targetScope = 'subscription'
 
