@@ -31,7 +31,7 @@ module vnet2 './vnet.bicep' = {
     vnetName: 'vnet2'
     location: location2
     vnetaddressrange: '10.0.2.0/24'
-    subnet1name: 'subnet2'
+    subnet1name: 'subnet1'
     subnet1range: '10.0.2.0/26'
     subnet2name: ' subnet2'
     subnet2range: '10.0.2.64/26'
