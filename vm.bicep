@@ -2,6 +2,7 @@ param location string
 param vnetid string
 param subnet1id string
 param subnet2id string
+param name string
 
 
 var linuximagePublisher = 'kinvolk'
@@ -20,7 +21,7 @@ var adminPassword = 'AFD-demo2024'
 
 
 resource webpip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
-  name: 'webpip'
+  name: '${name}-webpip'
   location: location
   properties: {
     publicIPAllocationMethod: 'Dynamic'
@@ -28,7 +29,7 @@ resource webpip 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
 }
 
 resource web 'Microsoft.Compute/virtualMachines@2024-03-01' = {
-  name: 'web'
+  name: name
   location: location
   plan: {
     publisher: linuximagePublisher
@@ -55,7 +56,7 @@ resource web 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       }
     }
     osProfile: {
-      computerName: 'web'
+      computerName: name
       adminUsername: adminUsername
       adminPassword: adminPassword
     }
@@ -75,7 +76,7 @@ resource web 'Microsoft.Compute/virtualMachines@2024-03-01' = {
 }
 
 resource webnic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
-  name: 'webnic'
+  name: '${name}-webnic'
   location: location
   properties: {
     ipConfigurations: [
@@ -96,7 +97,7 @@ resource webnic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
 }
 resource webruncommand 'Microsoft.Compute/virtualMachines/runCommands@2024-03-01' = {
   parent: web
-  name: 'webruncommand'
+  name: '${name}-runcommand'
   location: location
   properties: {
     source: {
@@ -106,7 +107,7 @@ resource webruncommand 'Microsoft.Compute/virtualMachines/runCommands@2024-03-01
 }
 resource webruncommand2 'Microsoft.Compute/virtualMachines/runCommands@2024-03-01' = {
   parent: web
-  name: 'web1runcommand2'
+  name: '${name}-web1runcommand2'
   dependsOn: [webruncommand]
   location: location
   properties: {
@@ -117,7 +118,7 @@ resource webruncommand2 'Microsoft.Compute/virtualMachines/runCommands@2024-03-0
 }
 
 resource yadaapi 'Microsoft.Compute/virtualMachines@2024-03-01' = {
-  name: 'yadaapi'
+  name: '${name}-yadaapi'
   location: location
   plan: {
     publisher: linuximagePublisher
@@ -143,7 +144,7 @@ resource yadaapi 'Microsoft.Compute/virtualMachines@2024-03-01' = {
       }
     }
     osProfile: {
-      computerName: 'yadaapi'
+      computerName: '${name}-yadaapi'
       adminUsername: adminUsername
       adminPassword: adminPassword
     }
@@ -163,7 +164,7 @@ resource yadaapi 'Microsoft.Compute/virtualMachines@2024-03-01' = {
 }
 
 resource apinic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
-  name: 'apinic'
+  name: '${name}-apinic'
   location: location
   properties: {
     ipConfigurations: [
@@ -182,7 +183,7 @@ resource apinic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
 
 resource apiruncommand 'Microsoft.Compute/virtualMachines/runCommands@2024-03-01' = {
   parent: yadaapi
-  name: 'apiruncommand'
+  name: '${name}-apiruncommand'
   location: location
   properties: {
     source: {
@@ -192,7 +193,7 @@ resource apiruncommand 'Microsoft.Compute/virtualMachines/runCommands@2024-03-01
 }
 resource apiruncommand2 'Microsoft.Compute/virtualMachines/runCommands@2024-03-01' = {
   parent: yadaapi
-  name: 'apiruncommand2'
+  name: '${name}-apiruncommand2'
   dependsOn: [apiruncommand]
   location: location
   properties: {

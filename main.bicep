@@ -44,6 +44,7 @@ module web1 './vm.bicep' = {
   scope: rg
   name: 'web1'
   params: {
+    name: 'web1'
     location: location1
     vnetid: vnet1.outputs.vnetid
     subnet1id: vnet1.outputs.subnet1id
@@ -55,6 +56,7 @@ module web2 './vm.bicep' = {
   scope: rg
   name: 'web2'
   params: {
+    name: 'web2'
     location: location2
     vnetid: vnet2.outputs.vnetid
     subnet1id: vnet2.outputs.subnet1id
