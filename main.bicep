@@ -67,7 +67,7 @@ module afd './afd.bicep' = {
   scope: rg
   name: 'yada-afd'
   params: {
-    location: location1
+    location: 'global'
     name: 'yada-afd'
     web1address: web1.outputs.webpipaddress
     web2address: web2.outputs.webpipaddress
