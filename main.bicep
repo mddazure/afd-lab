@@ -63,3 +63,13 @@ module web2 './vm.bicep' = {
     subnet2id: vnet2.outputs.subnet2id
   }
 }
+module afd './afd.bicep' = {
+  scope: rg
+  name: 'yada-afd'
+  params: {
+    location: location1
+    name: 'yada-afd'
+    web1address: web1.outputs.webpipaddress
+    web2address: web2.outputs.webpipaddress
+  }
+}

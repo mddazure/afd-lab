@@ -206,3 +206,4 @@ resource apiruncommand2 'Microsoft.Compute/virtualMachines/runCommands@2024-03-0
 output webid string = web.id
 output apiid string = yadaapi.id
 output webpipid string = webpip.id
+output webpipaddress string = webpip.properties.ipAddress
