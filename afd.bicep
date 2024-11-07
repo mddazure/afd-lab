@@ -17,6 +17,16 @@ resource afd 'Microsoft.Network/frontDoors@2021-06-01' = {
         }
       }
     ]
+    loadBalancingSettings: [
+      {
+        name: '${name}-lb'
+        properties: {
+          sampleSize: 4
+          successfulSamplesRequired: 2
+          additionalLatencyMilliseconds: 0
+        }
+      }
+    ]
     healthProbeSettings: [
       {
         name: 'probe1'
@@ -31,6 +41,9 @@ resource afd 'Microsoft.Network/frontDoors@2021-06-01' = {
       {
         name: '${name}-backendpool'
         properties: {
+          loadBalancingSettings: {
+            id: resourceId('Microsoft.Network/frontDoors/loadBalancingSettings', name, '${name}-lb')
+          }
           backends: [
             {
               address: web1address
