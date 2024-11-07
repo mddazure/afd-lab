@@ -36,10 +36,14 @@ resource afd 'Microsoft.Network/frontDoors@2021-06-01' = {
               address: web1address
               httpPort: 80
               httpsPort: 443
+              priority: 1
+              weight: 50
             }
             {address: web2address
               httpPort: 80
               httpsPort: 443
+              priority: 1
+              weight: 50
             }
           ]
           healthProbeSettings: {
